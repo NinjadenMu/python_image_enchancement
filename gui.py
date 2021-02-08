@@ -7,17 +7,20 @@ root = tkinter.Tk()
 root.title("python_image_enhancement")
 
 # Function for file upload handling
+selected_label = tkinter.Label(root, text="File selected: none")
 file_selected = ""
 def UploadAction(event=None):
     global file_selected
+    global selected_label
     filename = tkinter.filedialog.askopenfilename()
-    print("Selected:", filename)
+    selected_label.config(text="File selected: " + filename)
     file_selected = filename
 
 # Build display
 
 fileselect = tkinter.Button(root, text="Select file", command=UploadAction)
 fileselect.pack()
+selected_label.pack() # display label after button
 
 # main
 def launch():
