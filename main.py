@@ -1,4 +1,4 @@
-from PIL import Image, ImageStat, ImageEnhance, ImageFilter
+from PIL import Image, ImageStat, ImageEnhance, ImageFilter, ImageColor
 from blend_modes import *
 import numpy
 
@@ -23,8 +23,16 @@ def soft_glow(img_obj):
     bottom_layer = numpy.array(img_obj).astype(float)
     return Image.fromarray( numpy.uint8( lighten_only(bottom_layer, top_layer, 0.25) ) )
 
+def color_grade(img_obj):
+    # create colored overlay to put on top of image
+    blue_overlay = layer = Image.new("RGBA", img_obj.size, "#0071b2")
+    top_layer = numpy.array(blue_overlay).astype(float)
+    bottom_layer = numpy.array(img_obj).astype(float)
+    return Image.fromarray( numpy.uint8( overlay(bottom_layer, top_layer, 0.5) ) )
+
 if __name__ == "__main__":
     input_image = Image.open("input.jpg").convert("RGBA")
     input_image = smart_darken(input_image)
+    input_image = color_grade(input_image)
     #input_image = soft_glow(input_image)
     input_image.show()
