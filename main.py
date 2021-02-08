@@ -25,10 +25,10 @@ def soft_glow(img_obj):
 
 def color_grade(img_obj):
     # create colored overlay to put on top of image
-    blue_overlay = layer = Image.new("RGBA", img_obj.size, "#0071b2")
+    blue_overlay = layer = Image.new("RGBA", img_obj.size, "#3a6981")
     top_layer = numpy.array(blue_overlay).astype(float)
     bottom_layer = numpy.array(img_obj).astype(float)
-    return Image.fromarray( numpy.uint8( overlay(bottom_layer, top_layer, 0.25) ) )
+    return Image.fromarray( numpy.uint8( soft_light(bottom_layer, top_layer, 0.69) ) )
 
 # the main script
 def get_output_img(img_obj):
