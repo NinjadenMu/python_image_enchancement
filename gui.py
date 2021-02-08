@@ -26,7 +26,11 @@ selected_label.pack() # display label after button
 def launch():
     global file_selected
     if file_selected != "":
-        selected_image = Image.open(file_selected)
+        try:
+            selected_image = Image.open(file_selected)
+        except:
+            tkinter.messagebox.showerror("Error!", "Your image file is corrupted, loser")
+            return
         out = main.get_output_img(selected_image)
         out.save("output.png")
         out.show(title="\"enhanced\" image")
