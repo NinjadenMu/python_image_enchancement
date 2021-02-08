@@ -26,5 +26,5 @@ def soft_glow(img_obj):
 if __name__ == "__main__":
     input_image = Image.open("input.jpg").convert("RGBA")
     input_image = smart_darken(input_image)
-    input_image = soft_glow(input_image)
+    #input_image = soft_glow(input_image)
     input_image.show()
