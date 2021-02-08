@@ -28,8 +28,8 @@ def launch():
     if file_selected != "":
         selected_image = Image.open(file_selected)
         out = main.get_output_img(selected_image)
-        out.show("\"enhanced\" image")
         out.save("output.png")
+        out.show(title="\"enhanced\" image")
     else:
         tkinter.messagebox.showerror("Error!", "Please fill out the fields, idiot.")
 
