@@ -28,7 +28,7 @@ def color_grade(img_obj):
     blue_overlay = layer = Image.new("RGBA", img_obj.size, "#0071b2")
     top_layer = numpy.array(blue_overlay).astype(float)
     bottom_layer = numpy.array(img_obj).astype(float)
-    return Image.fromarray( numpy.uint8( overlay(bottom_layer, top_layer, 0.5) ) )
+    return Image.fromarray( numpy.uint8( overlay(bottom_layer, top_layer, 0.25) ) )
 
 if __name__ == "__main__":
     input_image = Image.open("input.jpg").convert("RGBA")
