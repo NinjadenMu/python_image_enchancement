@@ -31,12 +31,12 @@ def color_grade(img_obj):
     return Image.fromarray( numpy.uint8( overlay(bottom_layer, top_layer, 0.25) ) )
 
 # the main script
-def get_output_img(imgobj):
-    imgobj = imgobj.convert("RGBA")
-    imgobj = smart_darken(imgobj)
-    imgobj = color_grade(imgobj)
-    #imgobj = soft_glow(imgobj)
-    return imgobj
+def get_output_img(img_obj):
+    img_obj = img_obj.convert("RGBA")
+    img_obj = smart_darken(img_obj)
+    img_obj = color_grade(img_obj)
+    #img_obj = soft_glow(img_obj)
+    return img_obj
 
 if __name__ == "__main__":
     input_image = Image.open("input.jpg")
