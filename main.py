@@ -36,3 +36,4 @@ if __name__ == "__main__":
     input_image = color_grade(input_image)
     #input_image = soft_glow(input_image)
     input_image.show()
+    input_image.save("output.png")
