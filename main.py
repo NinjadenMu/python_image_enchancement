@@ -7,7 +7,7 @@ def smart_darken(img_obj):
     if brightness > 128:
         # darken
         brightness_enhancer = ImageEnhance.Brightness(img_obj)
-        factor = 0.69
+        factor = 0.5
         img_obj = brightness_enhancer.enhance(factor)
         # add contrast
         contrast_enhancer = ImageEnhance.Contrast(img_obj)
