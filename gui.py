@@ -1,6 +1,7 @@
 import tkinter, tkinter.filedialog, tkinter.messagebox
 from PIL import Image
 import main
+import webbrowser
 
 # Initiate Tkinter
 root = tkinter.Tk()
@@ -17,7 +18,6 @@ def UploadAction(event=None):
     file_selected = filename
 
 # Build display
-
 fileselect = tkinter.Button(root, text="Select file", command=UploadAction)
 fileselect.pack()
 selected_label.pack() # display label after button
@@ -41,7 +41,10 @@ def launch():
 submit = tkinter.Button(root, text="Launch program", command=launch)
 submit.pack()
 
-bottomtext = tkinter.Label(root, text="Find us on GitHub: https://github.com/NinjadenMu/python_image_enchancement")
+# Open in github button
+def openGithubPage():
+    webbrowser.open("https://github.com/NinjadenMu/python_image_enhancement")
+bottomtext = tkinter.Button(root, text="Fork me on GitHub", command=openGithubPage)
 bottomtext.pack()
 
 root.mainloop() # required for Tkinter
