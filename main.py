@@ -5,8 +5,17 @@ import numpy
 def smart_darken(img_obj):
     # get avg pixel brightness
     brightness = ImageStat.Stat( img_obj.convert('L') ).mean[0]
-    # only darken if brightness is above 50% grey
-    if brightness > 128:
+    # darken based on current brightness
+    if brightness > 192:
+        # darken
+        brightness_enhancer = ImageEnhance.Brightness(img_obj)
+        factor = 0.6
+        img_obj = brightness_enhancer.enhance(factor)
+        # add contrast
+        contrast_enhancer = ImageEnhance.Contrast(img_obj)
+        factor = 1.75
+        img_obj = contrast_enhancer.enhance(factor)
+    elif brightness > 128:
         # darken
         brightness_enhancer = ImageEnhance.Brightness(img_obj)
         factor = 0.69
@@ -14,6 +23,15 @@ def smart_darken(img_obj):
         # add contrast
         contrast_enhancer = ImageEnhance.Contrast(img_obj)
         factor = 1.5
+        img_obj = contrast_enhancer.enhance(factor)
+    elif brightness > 64:
+        # darken
+        brightness_enhancer = ImageEnhance.Brightness(img_obj)
+        factor = 0.8
+        img_obj = brightness_enhancer.enhance(factor)
+        # add contrast
+        contrast_enhancer = ImageEnhance.Contrast(img_obj)
+        factor = 1.25
         img_obj = contrast_enhancer.enhance(factor)
     return img_obj
 
