@@ -1,7 +1,10 @@
 import tkinter, tkinter.filedialog, tkinter.messagebox
-from PIL import Image
+from PIL import Image, ImageTk
 import main
 import webbrowser
+from functools import partial
+import os
+import copy
 
 # Initiate Tkinter
 root = tkinter.Tk()
@@ -32,8 +35,22 @@ def launch():
             tkinter.messagebox.showerror("Error!", "Your image file is corrupted, loser")
             return
         out = main.get_output_img(selected_image)
-        out.save("output.png")
-        out.show(title="\"enhanced\" image")
+        newroot = tkinter.Tk()
+        newroot.title("\"Enhanced\" Image")
+        out_thumb = copy.deepcopy(out)
+        out_thumb.thumbnail((500, 500))
+        out_tk = ImageTk.PhotoImage(out_thumb, master=newroot, height=900)
+        panel = tkinter.Label(newroot, image=out_tk)
+        panel.image = out_tk
+        panel.pack()
+        def file_save(data):
+            f = tkinter.filedialog.asksaveasfile(mode='w', defaultextension=".png", filetypes=(("PNG file", "*.png"),("All Files", "*.*") ))
+            if f:
+                abs_path = os.path.abspath(f.name)
+                data.save(abs_path)
+        savebutton = tkinter.Button(newroot, text="save as...", command=partial(file_save, out))
+        savebutton.pack()
+        newroot.mainloop()
     else:
         tkinter.messagebox.showerror("Error!", "Please fill out the fields, idiot.")
 
